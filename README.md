@@ -1,18 +1,10 @@
-# README for a newly created project.
+# RSS Get Userscript
 
-There are a couple of things you should do first, before you can use all of Git's power:
+This is from my personal old project which is hosted on google code [http://code.google.com/p/rssget/]
 
-  * Add a remote to this project: in the Cloud9 IDE command line, you can execute the following commands
-    `git remote add [remote name] [remote url (eg. 'git@github.com:/ajaxorg/node_chat')]` [Enter]
-  * Create new files inside your project
-  * Add them to to Git by executing the following command
-    `git add [file1, file2, file3, ...]` [Enter]
-  * Create a commit which can be pushed to the remote you just added
-    `git commit -m 'added new files'` [Enter]
-  * Push the commit the remote
-    `git push [remote name] master` [Enter]
+It's a user scripts for retrieve full content for google reader (no bloglines now, sorry).
+The supported is limited to a couple of sites e.g. hk.news.yahoo.com, based on a simple selector settings.
+The script work on either Firefox (with greasemonkey) and Google Chrome.
 
-That's it! If this doesn't work for you, please visit the excellent resources from [Github.com](http://help.github.com) and the [Pro Git](http://http://progit.org/book/) book.
-If you can't find your answers there, feel free to ask us via Twitter (@cloud9ide), [mailing list](groups.google.com/group/cloud9-ide) or IRC (#cloud9ide on freenode).
-
-Happy coding!
+I have refactored most of old code to make use of the newer js feature browser can provide now. 
+Also provided with a test.
