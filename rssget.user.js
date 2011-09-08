@@ -1,6 +1,6 @@
 // Google Reader Content Retrieve
 // version 2.0
-// 2010-09-06
+// 2011-09-06
 // ==UserScript==
 // @name          Google Reader Content Retrieve
 // @namespace     http://google.com/reader/greasemonkey/content
