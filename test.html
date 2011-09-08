@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+  <script type="text/javascript" src="rssget.user.js"></script>
+  <script type="text/javascript" src="rssget.user.test.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">QUnit example</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">
+    
+    <div class="testEntry"></div>
+    
+    <div class="testLink">
+        <a href="http://www.abc.com/1234">Test Article Link</a>        
+        <a href="http://www.def.com/1234">Test Article Link</a>
+    </div>
+    
+    <div class="testParser">
+        <a href="http://hk.rd.yahoo.com/45768">Test Article Link</a>        
+    </div>
+    
+    <div class="testReplaceContent">
+        <a href="http://hk.rd.yahoo.com/45768">Test Article Link</a>
+        <div class="item-body">
+            <div>old content</div>
+        </div>
+    </div>
+    
+    <div class="testRetrieveStory">
+        <a href="http://hk.rd.yahoo.com/1234">Test Article Link</a>
+        <div class="item-body">
+            <div>old content</div>
+        </div>
+    </div>
+    
+     <div class="testAppendMarker1">
+        <a href="http://hk.rd.yahoo.com/1234">Test Article Link</a>
+        <div class="item-body">
+            <div>old content</div>
+        </div>
+    </div>
+    <div class="testAppendMarker2">
+        <a href="http://hk.rd.yahoo.com/1234">Test Article Link</a>
+        <div class="item-body">
+            <div>old content</div>
+        </div>
+    </div>
+     
+ </div>
+</body>
+</html>
