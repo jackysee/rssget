@@ -12,7 +12,7 @@
 
 
 var doc = document,
-    currentEntry,
+    currentEntry, lastEntry, 
     rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
     hiddenDiv = doc.createElement('div'),
     emptyDiv = doc.createElement('div'),
@@ -101,7 +101,6 @@ function retrieveCurrentContent(){
     }
 }
 
-var lastEntry;
 function addMarker(){
     var entry = getCurrentEntry();
     if(entry != emptyDiv && entry != lastEntry){
