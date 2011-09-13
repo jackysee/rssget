@@ -28,7 +28,8 @@ var doc = document,
         {key:'blog.yam.com', selector:'div#post_content'},
         {key:'www.littleoslo.com', selector:'div.hentry-content.clear'},
         {key:'wanszezit.wordpress.com', selector:'div.entry-content'},
-        {key:'www.wretch.cc/blog', selector:'div.innertext'}
+        {key:'www.wretch.cc/blog', selector:'div.innertext'},
+		{key:'3cmusiccom', selector:'div.entry-content'}
     ];
 
 //Init basic elements
@@ -90,12 +91,21 @@ function retrieveCurrentContent(){
     var parser = getCurrentParser();
     if(parser){
         appendLoader();
+        var onload = function(response){
+			var content = getContent(response.responseText, parser.selector);
+            replaceContent(content);
+        };		
         GM_xmlhttpRequest({
             method: "GET",
             url: parser.link,
             onload: function(response){
-                var content = getContent(response.responseText, parser.selector);
-                replaceContent(content);
+                if(response.status == 301 || response.status == 302 || response.status == 303){ //moved    
+                   var loc = /Location: ([^\n]*)\n/.exec(response.responseHeaders)[1];
+                   GM_xmlhttpRequest({method:"GET", url:loc, onload:onload});
+                   return;
+				}else{
+					onload(response);
+				}
             }
         });
     }

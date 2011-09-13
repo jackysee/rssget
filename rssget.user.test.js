@@ -1,10 +1,19 @@
 //Mocking
-
-var responseText = "<p>abcd efghi <script>alert('abc');</script> defgh <div id='ynstory'>content of ynstory <b>important!</b></div></p>";
+var content = "content of ynstory <b>important!</b>";
+var responseText = "<p>abcd efghi <script>alert('abc');</script> defgh <div class='yom-art-content'><div class='bd'>"+content+"</div></div></p>";
 
 function GM_xmlhttpRequest(obj){
-    var resp = {responseText:responseText};
-    obj.onload(resp);
+	var resp;
+	if(obj.url == 'http://moved/3cmusiccom'){
+		resp = {status:301, responseHeaders: 'Location: http://movedto\n'};
+	}
+	else if(obj.url == 'http://movedto'){
+		resp = {responseText:"<div><div class='entry-content'>"+content+"</div></div>"};
+	}
+	else{
+		resp = {responseText:responseText};
+	}
+	obj.onload(resp);
 }
 
 
@@ -27,8 +36,8 @@ $(document).ready(function(){
     test("current entry match parser", function(){
         $('div.testParser').attr('id', 'current-entry');
         var parser = getCurrentParser();
-        equal(parser.selector, '#ynstory');
-        equal(parser.link, 'http://hk.rd.yahoo.com/45768');
+        equal(parser.selector, 'div.yom-art-content div.bd');
+        equal(parser.link, 'http://hk.news.yahoo.com/45768');
     });
     
     test("hidden div exists", function(){
@@ -42,7 +51,7 @@ $(document).ready(function(){
     
     test("get content from text, with script stripped", function(){
         var str = responseText;
-        equal(getContent(str, "#ynstory"), "content of ynstory <b>important!</b>");
+        equal(getContent(str, "div.yom-art-content div.bd"), content);
     });
     
     test("test get item div", function(){
@@ -66,13 +75,28 @@ $(document).ready(function(){
     test("retrieve story", function(){
         $('div.testRetrieveStory').attr('id', 'current-entry');
         retrieveCurrentContent();
-        equals(currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML, "content of ynstory <b>important!</b>");
+        equals(currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML, content);
         
         //Should retrieve again
         currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML = "new content";
         retrieveCurrentContent();
-        equals(currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML, "content of ynstory <b>important!</b>");
+        equals(currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML, content);
     });
+	
+	asyncTest("redirect", function(){
+		start();
+		$('div.testMoved').attr('id', 'current-entry');
+		stop();
+		setTimeout(function(){
+			start();
+			retrieveCurrentContent();
+			stop();
+			setTimeout(function(){
+				start();
+				equals(currentEntry.querySelectorAll('div.item-body>div')[0].innerHTML, content);
+			}, 110);
+		},110);
+	});
     
     test("test no current entry", function(){
         var parser = getCurrentParser();
